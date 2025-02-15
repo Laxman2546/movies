@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./navbar";
 
 const Home = () => {
   const [names, setNames] = useState([]);
@@ -8,7 +9,7 @@ const Home = () => {
 
   const movieData = async (pageNumber) => {
     const response = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?include_adult=false&with_original_language=te&page=${pageNumber}`,
+      `https://api.themoviedb.org/3/discover/movie?include_adult=false&with_original_language=te&page=${pageNumber}&sort_by=popularity.desc`,
       {
         method: "GET",
         headers: {
@@ -18,12 +19,15 @@ const Home = () => {
       }
     );
     const moviesLists = await response.json();
+    console.log(moviesLists);
     setNames((prev) => [
       ...prev,
       ...moviesLists.results.map((result) => ({
         name: result.name || result.title,
         poster: result.poster_path,
         id: result.id,
+        overview: result.overview,
+        release: result.release_date,
       })),
     ]);
   };
@@ -51,15 +55,21 @@ const Home = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   return (
     <>
+      <Navbar />
       <div className="w-full mt-4 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
         {names.map((movie, index) => (
           <div key={index} className="mt-2.5">
             <Link
               to="/player"
-              state={{ movieId: movie.id, movieName: movie.name }}
+              state={{
+                movieId: movie.id,
+                movieName: movie.name,
+                movieoverview: movie.overview,
+                poster: movie.poster,
+                release: movie.release,
+              }}
             >
               <div className="flex flex-col items-center cursor-pointer">
                 <img
@@ -74,6 +84,14 @@ const Home = () => {
             </Link>
           </div>
         ))}
+        <div className="loadmore lg:hidden sm:flex w-full items-center p-10 justify-center text-center ">
+          <button
+            className=" w-full h-10 flex items-center justify-center bg-sky-400 rounded-2xl"
+            onClick={() => loadMore()}
+          >
+            Loadmore
+          </button>
+        </div>
       </div>
     </>
   );

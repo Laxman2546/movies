@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Moviedetails from "./movieDetails";
+import Navbar from "./navbar";
 
 const Movieplayer = () => {
   const location = useLocation();
-  const { movieName } = location.state;
-  const { movieId } = location.state;
+  const { movieName, poster, movieoverview, movieId, release } = location.state;
+  console.log(poster);
   useEffect(() => {
     const handleClick = (event) => {
       if (event.target.tagName === "A" || event.target.closest("a")) {
@@ -19,15 +21,14 @@ const Movieplayer = () => {
       document.removeEventListener("click", handleClick);
     };
   }, []);
-
   window.open = function () {
     console.log("Blocked an attempt to open a new window.");
     return null;
   };
   const url = `https://vidsrc.xyz/embed/movie/${movieId}`;
-
   return (
     <>
+      <Navbar />
       <div className="main relative overflow-hidden pt-[56.25%] sm:pt-[75%] md:pt-[66.66%]">
         <iframe
           src={url}
@@ -36,6 +37,9 @@ const Movieplayer = () => {
           allowFullScreen
         ></iframe>
       </div>
+      <Moviedetails
+        moviedetails={{ movieName, movieoverview, poster, release }}
+      />
     </>
   );
 };
