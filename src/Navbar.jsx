@@ -1,66 +1,114 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import searchBtn from "./assets/search.png";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import sun from "./assets/sun.png";
 import moon from "./assets/moon.png";
+
 const Navbar = () => {
-  const [search, setsearch] = useState("");
-  const [mode, setMode] = useState(false);
-  let switchMode = () => {
-    setMode(!mode);
+  const [search, setSearch] = useState("");
+  const [mode, setMode] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); // Controls mobile menu visibility
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = mode ? "#fff" : "#000";
+    document.body.style.color = mode ? "#000" : "#fff";
+  }, [mode]);
+
+  // Handle Search
+  const handleSearch = () => {
+    if (search.trim()) {
+      navigate(`/?query=${search}`);
+    }
   };
-  const body = document.querySelector("body");
-  if (mode === true) {
-    body.style.backgroundColor = "#000";
-    body.style.color = "#fff";
-  } else {
-    body.style.backgroundColor = "#fff";
-    body.style.color = "#000";
-  }
 
   return (
-    <>
-      <div className="navMain flex flex-row p-5 justify-between">
-        <div className="heading">
-          <h1 className=" font-bold text-2xl">NaniMovies</h1>
-        </div>
-        <div className="navLinks lg:flex  md:flex sm:hidden  flex-row gap-8 mt-0.5">
-          <Link to={"/"}>Home</Link>
-          <Link to={"/"}>Trending</Link>
-          <Link to={"/"}>Anime</Link>
-          <Link to={"/"}>Webseries</Link>
-        </div>
-        <div className="search relative">
-          <input
-            type="text"
-            className="pl-5 mr-8  p-2 border-1 rounded-2xl"
-            placeholder="Seacrh Movie"
-            value={search}
-            onChange={(e) => setsearch(e.target.value)}
-          />
-          <div className="seaMode">
-            <div className="search absolute bottom-3.5 right-10 cursor-pointer">
-              <img
-                src="https://img.icons8.com/ios-filled/50/search--v2.png"
-                width={15}
-                height={15}
-                className="search"
-              />
-            </div>
-          </div>
-          <div className="mode absolute right-0 bottom-3.5">
+    <nav className="p-5 flex justify-between items-center bg-gray-100 dark:bg-gray-900">
+      <h1 className="font-bold text-2xl text-gray-800 dark:text-white">
+        NaniMovies
+      </h1>
+
+      <div className="hidden md:flex gap-8 text-gray-700 dark:text-gray-300">
+        <Link to="/">Home</Link>
+        <Link to="/">Trending</Link>
+        <Link to="/">Anime</Link>
+        <Link to="/">Webseries</Link>
+      </div>
+      <button
+        className="md:hidden text-gray-700 dark:text-white"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      <div className="hidden md:flex items-center gap-3">
+        <input
+          type="text"
+          className="p-2 border rounded-xl"
+          placeholder="Search Movie"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+        />
+        <img
+          src="https://img.icons8.com/ios-filled/50/search--v2.png"
+          width={20}
+          height={20}
+          className="cursor-pointer"
+          onClick={handleSearch}
+        />
+        <img
+          src={mode ? sun : moon}
+          alt="modechange"
+          width={20}
+          height={20}
+          className="cursor-pointer p-1 bg-blue-50 rounded-xl"
+          onClick={() => setMode((prev) => !prev)}
+        />
+      </div>
+      {isOpen && (
+        <div className="absolute top-16 left-0 w-full bg-gray-100 dark:bg-gray-900 md:hidden flex flex-col items-center py-5 gap-5 text-gray-800 dark:text-gray-300 z-50">
+          <Link to="/" onClick={() => setIsOpen(false)}>
+            Home
+          </Link>
+          <Link to="/" onClick={() => setIsOpen(false)}>
+            Trending
+          </Link>
+          <Link to="/" onClick={() => setIsOpen(false)}>
+            Anime
+          </Link>
+          <Link to="/" onClick={() => setIsOpen(false)}>
+            Webseries
+          </Link>
+
+          <div className="flex items-center gap-3">
+            <input
+              type="text"
+              className="p-2 border rounded-xl"
+              placeholder="Search Movie"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
+            <img
+              src="https://img.icons8.com/ios-filled/50/search--v2.png"
+              width={20}
+              height={20}
+              className="cursor-pointer"
+              onClick={handleSearch}
+            />
             <img
               src={mode ? sun : moon}
               alt="modechange"
               width={20}
               height={20}
-              className="sun"
-              onClick={switchMode}
+              className="cursor-pointer p-1 bg-blue-50 rounded-xl"
+              onClick={() => setMode((prev) => !prev)}
             />
           </div>
         </div>
-      </div>
-    </>
+      )}
+    </nav>
   );
 };
 

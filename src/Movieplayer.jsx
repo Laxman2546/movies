@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Moviedetails from "./movieDetails";
 import Navbar from "./navbar";
+import Trending from "./trending";
 
 const Movieplayer = () => {
   const location = useLocation();
@@ -14,7 +15,6 @@ const Movieplayer = () => {
         console.log("Link click blocked!");
       }
     };
-
     document.addEventListener("click", handleClick);
 
     return () => {
