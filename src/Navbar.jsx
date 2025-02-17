@@ -32,7 +32,7 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/">Trending</Link>
         <Link to="/">Anime</Link>
-        <Link to="/">Webseries</Link>
+        <Link to="/webseries">Webseries</Link>
       </div>
       <button
         className="md:hidden text-gray-700 dark:text-white"
@@ -77,7 +77,7 @@ const Navbar = () => {
           <Link to="/" onClick={() => setIsOpen(false)}>
             Anime
           </Link>
-          <Link to="/" onClick={() => setIsOpen(false)}>
+          <Link to="webseries" onClick={() => setIsOpen(false)}>
             Webseries
           </Link>
 

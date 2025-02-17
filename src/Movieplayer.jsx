@@ -2,12 +2,16 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Moviedetails from "./movieDetails";
 import Navbar from "./navbar";
-import Trending from "./trending";
 
 const Movieplayer = () => {
   const location = useLocation();
-  const { movieName, poster, movieoverview, movieId, release } = location.state;
-  console.log(poster);
+  const searchParams = new URLSearchParams(location.search);
+  const movieName = searchParams.get("movieName");
+  const poster = searchParams.get("poster");
+  const movieoverview = searchParams.get("movieoverview");
+  const movieId = searchParams.get("movieId");
+  const release = searchParams.get("release");
+
   useEffect(() => {
     const handleClick = (event) => {
       if (event.target.tagName === "A" || event.target.closest("a")) {
@@ -21,11 +25,14 @@ const Movieplayer = () => {
       document.removeEventListener("click", handleClick);
     };
   }, []);
+
   window.open = function () {
     console.log("Blocked an attempt to open a new window.");
     return null;
   };
+
   const url = `https://vidsrc.xyz/embed/movie/${movieId}`;
+
   return (
     <>
       <Navbar />
