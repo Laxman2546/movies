@@ -11,27 +11,16 @@ const Movieplayer = () => {
   const movieoverview = searchParams.get("movieoverview");
   const movieId = searchParams.get("movieId");
   const release = searchParams.get("release");
-
-  useEffect(() => {
-    const handleClick = (event) => {
-      if (event.target.tagName === "A" || event.target.closest("a")) {
-        event.preventDefault();
-        console.log("Link click blocked!");
-      }
-    };
-    document.addEventListener("click", handleClick);
-
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
+  const seriesId = searchParams.get("seriesId");
 
   window.open = function () {
     console.log("Blocked an attempt to open a new window.");
     return null;
   };
 
-  const url = `https://vidsrc.xyz/embed/movie/${movieId}`;
+  const url = movieId
+    ? `https://vidsrc.xyz/embed/movie/${movieId}`
+    : `https://vidsrc.icu/embed/tv/${seriesId}/1/1`;
 
   return (
     <>
