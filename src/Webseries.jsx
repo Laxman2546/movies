@@ -1,32 +1,58 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./navbar";
+import noposter from "./assets/noposter.jpg";
 
 const Webseries = () => {
-  const [webnames, setwebnames] = useState([]);
+  const [webnames, setWebnames] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const movieApi = import.meta.env.VITE_APP_MOVIE_ACCESS_KEY;
-  const url = `https://api.themoviedb.org/3/discover/tv?include_adult=True&include_null_first_air_dates=false&with_original_language=en&page=${page}&sort_by=popularity.desc`;
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${movieApi}`,
-      accept: "application/json",
-    },
-  };
-  useEffect(() => {
-    fetch(url, options)
-      .then((res) => res.json())
-      .then((json) => {
-        setwebnames((prev) => [...prev, ...json.results]);
-        setLoading(false);
-        console.log(json.results);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("query");
+
+  const fetchWebseries = async (pageNumber, isSearch = false) => {
+    const isTV = true;
+    const url = query
+      ? `https://api.themoviedb.org/3/search/${
+          isTV ? "tv" : "movie"
+        }?query=${query}&page=${pageNumber}`
+      : `https://api.themoviedb.org/3/discover/${
+          isTV ? "tv" : "movie"
+        }?include_adult=false&with_original_language=te&page=${pageNumber}&sort_by=popularity.desc`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${movieApi}`,
+          Accept: "application/json",
+        },
       });
+
+      const data = await response.json();
+      setWebnames((prev) =>
+        isSearch ? data.results : [...prev, ...data.results]
+      );
+      setLoading(false);
+      handleScroll();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    setWebnames([]);
+    fetchWebseries(1, true);
+  }, [query]);
+
+  useEffect(() => {
+    if (!query) {
+      fetchWebseries(page);
+    }
   }, [page]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -53,10 +79,10 @@ const Webseries = () => {
               src={
                 webname.poster_path
                   ? `https://image.tmdb.org/t/p/w500${webname.poster_path}`
-                  : `https://placehold.co/600x850.png`
+                  : noposter
               }
-              alt="Webseries poster"
-              className="w-[250px]"
+              alt={webname.name}
+              className="w-[250px] h-[300px]"
               onClick={() => {
                 const url = `/player?seriesId=${webname.id}`;
                 window.open(url, "_blank");
@@ -64,9 +90,6 @@ const Webseries = () => {
             />
             <h1 className="lg:text-xl md:text-lg sm:text-sm font-medium">
               {webname.name}
-            </h1>
-            <h1 className="lg:text-xl md:text-lg sm:text-sm font-medium">
-              {webname.id}
             </h1>
           </div>
         ))}

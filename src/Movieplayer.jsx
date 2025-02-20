@@ -13,11 +13,6 @@ const Movieplayer = () => {
   const release = searchParams.get("release");
   const seriesId = searchParams.get("seriesId");
 
-  window.open = function () {
-    console.log("Blocked an attempt to open a new window.");
-    return null;
-  };
-
   const url = movieId
     ? `https://vidsrc.xyz/embed/movie/${movieId}`
     : `https://vidsrc.icu/embed/tv/${seriesId}/1/1`;
@@ -27,12 +22,17 @@ const Movieplayer = () => {
       <Navbar />
       <div className="main relative overflow-hidden pt-[56.25%] sm:pt-[75%] md:pt-[66.66%]">
         <iframe
-          src={url}
+          src={`https://player4u.xyz/embed?key=${movieName}+${release}`}
           className="absolute top-0 left-0 w-full h-full"
           title="Movie Page"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          scrolling="no"
           allowFullScreen
         ></iframe>
       </div>
+      {/* <iframe src={url} title="Movie Page" allowFullScreen></iframe> */}
       <Moviedetails
         moviedetails={{ movieName, movieoverview, poster, release }}
       />
