@@ -8,6 +8,7 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const [mode, setMode] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -20,13 +21,16 @@ const Navbar = () => {
     if (search.trim()) {
       const searchType = location.pathname.includes("webseries")
         ? "webseries"
-        : "movie";
+        : "";
       navigate(`/${searchType}?query=${search}`);
     }
   };
-
+  const handleCross = () => {
+    setSearch("");
+    setIsSearch(false);
+  };
   return (
-    <nav className="p-5 flex justify-between items-center bg-gray-100 dark:bg-gray-900">
+    <nav className="p-5 flex justify-between items-center bg-gray-100 dark:bg-gray-900 sticky top-0 z-20">
       <h1 className="font-bold text-2xl text-gray-800 dark:text-white">
         NaniMovies
       </h1>
@@ -46,18 +50,32 @@ const Navbar = () => {
       </button>
 
       <div className="hidden md:flex items-center gap-3">
-        <input
-          type="text"
-          className="p-2 border rounded-xl"
-          placeholder={
-            location.pathname.includes("webseries")
-              ? "Search Webseries"
-              : "Search Movie"
-          }
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-        />
+        <div className="input relative">
+          <input
+            type="text"
+            className="p-2 border rounded-xl"
+            placeholder={
+              location.pathname.includes("webseries")
+                ? "Search Webseries"
+                : "Search Movie"
+            }
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setIsSearch(e.target.value.trim() !== "");
+            }}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          />
+          {isSearch ? (
+            <X
+              size={20}
+              onClick={() => handleCross()}
+              className="absolute top-2.5 right-2 cursor-pointer"
+            />
+          ) : (
+            ""
+          )}
+        </div>
         <img
           src="https://img.icons8.com/ios-filled/50/search--v2.png"
           width={20}
@@ -91,25 +109,42 @@ const Navbar = () => {
           </Link>
 
           <div className="flex items-center gap-3">
-            <input
-              type="text"
-              className="p-2 border rounded-xl"
-              placeholder={
-                location.pathname.includes("webseries")
-                  ? "Search Webseries"
-                  : "Search Movie"
-              }
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            />
+            <div className="input relative">
+              <input
+                type="text"
+                className="p-2 border rounded-xl relative"
+                placeholder={
+                  location.pathname.includes("webseries")
+                    ? "Search Webseries"
+                    : "Search Movie"
+                }
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setIsSearch(e.target.value.trim() !== "");
+                }}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              />
+              {isSearch ? (
+                <X
+                  size={28}
+                  onClick={() => handleCross()}
+                  className="absolute top-2 right-2  cursor-pointer"
+                />
+              ) : (
+                ""
+              )}
+            </div>
             <img
               src="https://img.icons8.com/ios-filled/50/search--v2.png"
               width={20}
               height={20}
-              className="cursor-pointer"
+              className={`cursor-pointer ${
+                !search.trim() ? "opacity-50 cursor-not-allowed" : ""
+              }`}
               onClick={handleSearch}
             />
+
             <img
               src={mode ? sun : moon}
               alt="modechange"

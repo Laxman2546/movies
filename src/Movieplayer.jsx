@@ -12,6 +12,9 @@ const Movieplayer = () => {
   const movieId = searchParams.get("movieId");
   const release = searchParams.get("release");
   const seriesId = searchParams.get("seriesId");
+  const seriesname = searchParams.get("seriesname");
+  const seriesyear = searchParams.get("seriesyear");
+  const seriesoverview = searchParams.get("seriesoverview");
 
   const url = movieId
     ? `https://vidsrc.xyz/embed/movie/${movieId}`
@@ -20,9 +23,11 @@ const Movieplayer = () => {
   return (
     <>
       <Navbar />
-      <div className="main relative overflow-hidden pt-[56.25%] sm:pt-[75%] md:pt-[66.66%]">
+      <div className="main relative overflow-hidden pt-[56.25%] sm:pt-[75%] md:pt-[66.66%] ">
         <iframe
-          src={`https://player4u.xyz/embed?key=${movieName}+${release}`}
+          src={`https://player4u.xyz/embed?key=${movieName || seriesname}+${
+            release || seriesyear
+          }`}
           className="absolute top-0 left-0 w-full h-full"
           title="Movie Page"
           width="100%"
@@ -34,7 +39,15 @@ const Movieplayer = () => {
       </div>
       {/* <iframe src={url} title="Movie Page" allowFullScreen></iframe> */}
       <Moviedetails
-        moviedetails={{ movieName, movieoverview, poster, release }}
+        moviedetails={{
+          movieName,
+          movieoverview,
+          poster,
+          release,
+          seriesname,
+          seriesyear,
+          seriesoverview,
+        }}
       />
     </>
   );

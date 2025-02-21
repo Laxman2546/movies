@@ -2,42 +2,39 @@ import React from "react";
 
 const Moviedetails = ({ moviedetails }) => {
   return (
-    <>
-      <div className="main p-15 w-full flex flex-row gap-5 md:p-10 sm:p-0">
-        <div className="image">
+    <div className="main p-5 w-full md:p-10 sm:p-0">
+      <div className="posterdet flex flex-col md:flex-row gap-5">
+        <div className="image w-full md:w-1/3 flex justify-center">
           <img
             src={`https://image.tmdb.org/t/p/w500${moviedetails.poster}`}
-            width={200}
-            height={200}
+            className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
+            alt="Movie Poster"
           />
         </div>
-        <div className="moviemain">
-          <div className="title ">
-            <h1 className="lg:text-3xl md:text-2xl sm:text-lg text-nowrap font-bold">
-              {moviedetails.movieName}
-            </h1>
-          </div>
-          <div className="overview">
-            <h1 className="lg:text-lg md:text-md sm:text-sm lg:w-150 md:w-100 sm:w-80 mt-2 font-bold">
-              Overview:
-            </h1>
-            <p className="lg:text-lg md:text-md sm:text-sm lg:w-150 md:w-100 sm:w-80 mt-2">
-              {moviedetails.movieoverview
-                ? moviedetails.movieoverview
+
+        <div className="moviemain flex-1">
+          <h1 className="text-2xl md:text-3xl font-bold">
+            {moviedetails.movieName || moviedetails.seriesname}
+          </h1>
+          <div className="overview mt-2">
+            <h2 className="text-lg font-bold">Overview:</h2>
+            <p className="text-sm md:text-md mt-1">
+              {moviedetails.movieoverview || moviedetails.seriesoverview
+                ? moviedetails.movieoverview || moviedetails.seriesoverview
                 : "No overview found"}
             </p>
-            <h1 className="lg:text-lg md:text-md sm:text-sm lg:w-150 md:w-100 sm:w-80 mt-2 font-bold">
-              Release date:
-            </h1>
-            <p className="lg:text-lg md:text-md sm:text-sm lg:w-150 md:w-100 sm:w-80 mt-2">
-              {moviedetails.release
-                ? moviedetails.release
-                : "No Releasedate found"}
+          </div>
+          <div className="release mt-2">
+            <h2 className="text-lg font-bold">Release Date:</h2>
+            <p className="text-sm md:text-md mt-1">
+              {moviedetails.release || moviedetails.seriesyear
+                ? moviedetails.release || moviedetails.seriesyear
+                : "No Release date found"}
             </p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

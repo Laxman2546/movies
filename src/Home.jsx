@@ -12,9 +12,8 @@ const Home = () => {
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
 
-  // Fetch movies (search or normal list)
   const fetchMovies = async (pageNumber, isSearch = false) => {
-    if (loading) return; // Prevent multiple API calls
+    if (loading) return;
     setLoading(true);
 
     const isTV = false;
@@ -47,19 +46,16 @@ const Home = () => {
     }
   };
 
-  // Reset and fetch new movies when the query changes
   useEffect(() => {
     setNames([]);
     setPage(1);
     fetchMovies(1, true);
   }, [query]);
 
-  // Fetch movies when page changes
   useEffect(() => {
     fetchMovies(page);
   }, [page]);
 
-  // Infinite scrolling for both search and default results
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -102,7 +98,7 @@ const Home = () => {
                     : noposter
                 }
                 alt={movie.name || movie.title}
-                style={{ height: "300px" }}
+                className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
               />
               <h4 className="font-medium text-xl">
                 {movie.name || movie.title}

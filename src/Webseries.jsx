@@ -6,13 +6,16 @@ import noposter from "./assets/noposter.jpg";
 const Webseries = () => {
   const [webnames, setWebnames] = useState([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const movieApi = import.meta.env.VITE_APP_MOVIE_ACCESS_KEY;
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
 
   const fetchWebseries = async (pageNumber, isSearch = false) => {
+    if (loading) return;
+    setLoading(true);
+
     const isTV = true;
     const url = query
       ? `https://api.themoviedb.org/3/search/${
@@ -21,6 +24,7 @@ const Webseries = () => {
       : `https://api.themoviedb.org/3/discover/${
           isTV ? "tv" : "movie"
         }?include_adult=false&with_original_language=te&page=${pageNumber}&sort_by=popularity.desc`;
+
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -31,15 +35,16 @@ const Webseries = () => {
       });
 
       const data = await response.json();
+      console.log(data);
+
       setWebnames((prev) =>
         isSearch ? data.results : [...prev, ...data.results]
       );
-      setLoading(false);
-      handleScroll();
     } catch (error) {
       console.error("Error fetching data:", error);
-      setLoading(false);
     }
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -55,6 +60,7 @@ const Webseries = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      if (loading) return;
       if (
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 10
@@ -62,9 +68,10 @@ const Webseries = () => {
         setPage((prevPage) => prevPage + 1);
       }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [loading]);
 
   return (
     <>
@@ -82,9 +89,17 @@ const Webseries = () => {
                   : noposter
               }
               alt={webname.name}
-              className="w-[250px] h-[300px]"
+              className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
               onClick={() => {
-                const url = `/player?seriesId=${webname.id}`;
+                const year = new Date(webname.first_air_date).getFullYear();
+                const url = `/player?seriesId=${
+                  webname.id
+                }&seriesname=${encodeURIComponent(
+                  webname.name
+                )}&seriesyear=${encodeURIComponent(
+                  year
+                )}&poster=${encodeURIComponent(webname.poster_path)}
+                &seriesoverview=${encodeURIComponent(webname.overview)}`;
                 window.open(url, "_blank");
               }}
             />
@@ -94,6 +109,8 @@ const Webseries = () => {
           </div>
         ))}
       </div>
+
+      {loading && <p className="text-center text-gray-500 mt-4">Loading...</p>}
     </>
   );
 };
