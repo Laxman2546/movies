@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./navbar";
+import Credits from "./credits";
 import noposter from "./assets/noposter.jpg";
-
 const Home = () => {
   const [names, setNames] = useState([]);
   const [page, setPage] = useState(1);
@@ -11,7 +11,6 @@ const Home = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
-
   const fetchMovies = async (pageNumber, isSearch = false) => {
     if (loading) return;
     setLoading(true);

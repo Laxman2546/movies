@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+.castimg::-webkit-scrollbar {
+  height: 8px; /* Height for horizontal scrollbar */
+}
+
+.castimg::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar */
+  border-radius: 4px;
+}
+
+.castimg::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker when hovered */
+}

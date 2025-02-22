@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Movieplayer from "./moviePlayer";
 import Webseries from "./Webseries";
+import Trending from "./trending";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/player" element={<Movieplayer />} />
         <Route path="/webseries" element={<Webseries />} />
+        <Route path="/trending" element={<Trending />} />
       </Routes>
     </>
   );

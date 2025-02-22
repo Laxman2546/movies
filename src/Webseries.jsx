@@ -35,7 +35,6 @@ const Webseries = () => {
       });
 
       const data = await response.json();
-      console.log(data);
 
       setWebnames((prev) =>
         isSearch ? data.results : [...prev, ...data.results]

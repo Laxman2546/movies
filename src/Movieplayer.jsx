@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Moviedetails from "./movieDetails";
 import Navbar from "./navbar";
+import Credits from "./credits";
 
 const Movieplayer = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const Movieplayer = () => {
   return (
     <>
       <Navbar />
-      <div className="main relative overflow-hidden pt-[56.25%] sm:pt-[75%] md:pt-[66.66%] ">
+      <div className="main relative overflow-hidden pt-[56.25%] sm:pt-[75%] md:pt-[66.66%]">
         <iframe
           src={`https://player4u.xyz/embed?key=${movieName || seriesname}+${
             release || seriesyear
@@ -37,13 +38,15 @@ const Movieplayer = () => {
           allowFullScreen
         ></iframe>
       </div>
-      {/* <iframe src={url} title="Movie Page" allowFullScreen></iframe> */}
+
       <Moviedetails
         moviedetails={{
+          movieId,
           movieName,
           movieoverview,
           poster,
           release,
+          seriesId,
           seriesname,
           seriesyear,
           seriesoverview,
