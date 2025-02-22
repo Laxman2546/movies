@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import Moviedetails from "./movieDetails";
 import Navbar from "./navbar";
-import Credits from "./credits";
-
 const Movieplayer = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
