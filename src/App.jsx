@@ -3,7 +3,6 @@ import Home from "./Home";
 import Movieplayer from "Movieplayer";
 import Webseries from "./Webseries";
 import Trending from "./trending";
-import Movieplayer from "./moviePlayer";
 
 const App = () => {
   return (
