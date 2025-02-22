@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Webseries from "./Webseries";
-
-import Movieplayer from "./moviePlayer";
+import Movieplayer from "./Movieplayer";
 const App = () => {
   return (
     <>
