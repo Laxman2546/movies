@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Credits from "./credits";
+import Credits from "./Credits";
 
 const Moviedetails = ({ moviedetails }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);

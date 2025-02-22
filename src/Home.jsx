@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
-import Credits from "./credits";
 import noposter from "./assets/noposter.jpg";
 const Home = () => {
   const [names, setNames] = useState([]);

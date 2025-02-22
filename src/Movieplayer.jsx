@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Moviedetails from "./movieDetails";
+import Moviedetails from "./Moviedetails";
 import Navbar from "./Navbar";
 const Movieplayer = () => {
   const location = useLocation();
