@@ -72,7 +72,17 @@ const Home = () => {
   return (
     <>
       <Navbar />
-     
+      <iframe
+        width="100%"
+        height="100%"
+        scrolling="no"
+        frameborder="0"
+        allowtransparency="true"
+        marginwidth="0"
+        marginheight="0"
+        allowfullscreen=""
+        src="https://fclembed.online/hembedplayer/csstream4/1/960/540"
+      ></iframe>
       <div className="w-full mt-4 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 gap-4">
         {names.map((movie, index) => (
           <div key={index} className="mt-2.5">
