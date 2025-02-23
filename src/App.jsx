@@ -6,7 +6,7 @@ import Stopper from "./Stopper";
 const App = () => {
   return (
     <>
-      <Stopper />;
+      {/* <Stopper />; */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/player" element={<Movieplayer />} />

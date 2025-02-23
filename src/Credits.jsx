@@ -19,7 +19,6 @@ const Credits = ({ id }) => {
           }
         );
         const data = await response.json();
-        console.log(data.cast);
         setcastDatas(data.cast);
       } catch (error) {
         console.error("Error fetching movie cast:", error);
@@ -31,7 +30,7 @@ const Credits = ({ id }) => {
 
   return (
     <>
-      <div className="castDetails w-full max-w-4xl mx-auto mt-4   ">
+      <div className="castDetails w-full max-w-4xl  mt-4   ">
         <h1 className="text-lg font-bold  mb-2">Cast:</h1>
         <div
           className="castimg w-full flex flex-nowrap gap-4 overflow-x-auto scroll-smooth touch-pan-x pb-2 p-5 select-none rounded-lg"
