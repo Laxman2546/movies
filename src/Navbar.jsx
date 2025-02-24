@@ -24,10 +24,16 @@ const Navbar = () => {
         : "";
       navigate(`/${searchType}?query=${search}`);
     }
+    if (search.length === 0) {
+      console.log("it was an empty");
+    }
   };
   const handleCross = () => {
     setSearch("");
     setIsSearch(false);
+    location.pathname.includes("webseries")
+      ? navigate("/webseries")
+      : navigate("/");
   };
   return (
     <nav className="p-5 flex justify-between items-center bg-gray-100 dark:bg-gray-900 sticky top-0 z-20">

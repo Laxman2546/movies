@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import noposter from "./assets/noposter.jpg";
+import Stopper from "./Stopper";
 const Home = () => {
   const [names, setNames] = useState([]);
   const [page, setPage] = useState(1);
@@ -13,7 +14,6 @@ const Home = () => {
   const fetchMovies = async (pageNumber, isSearch = false) => {
     if (loading) return;
     setLoading(true);
-
     const isTV = false;
     const url = query
       ? `https://api.themoviedb.org/3/search/${
@@ -71,51 +71,51 @@ const Home = () => {
 
   return (
     <>
+      <Stopper />
       <Navbar />
-      <iframe
-        width="100%"
-        height="100%"
-        scrolling="no"
-        frameborder="0"
-        allowtransparency="true"
-        marginwidth="0"
-        marginheight="0"
-        allowfullscreen=""
-        src="https://fclembed.online/hembedplayer/csstream4/1/960/540"
-      ></iframe>
-      <div className="w-full mt-4 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 gap-4">
-        {names.map((movie, index) => (
-          <div key={index} className="mt-2.5">
-            <div
-              className="flex flex-col items-center cursor-pointer"
-              onClick={() => {
-                const year = new Date(movie.release_date).getFullYear();
-                const url = `/player?movieId=${
-                  movie.id
-                }&movieName=${encodeURIComponent(
-                  movie.name || movie.title
-                )}&movieoverview=${encodeURIComponent(movie.overview)}&poster=${
-                  movie.poster_path
-                }&release=${year}`;
-                window.open(url, "_blank");
-              }}
-            >
-              <img
-                src={
-                  movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                    : noposter
-                }
-                alt={movie.name || movie.title}
-                className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
-              />
-              <h4 className="font-medium text-xl">
-                {movie.name || movie.title}
-              </h4>
+      {loading && names.length === 0 ? (
+        <div className="text-center text-xl font-semibold mt-10">
+          Loading...
+        </div>
+      ) : names.length === 0 ? (
+        <div className="text-center text-xl font-semibold mt-10">
+          No results found for "{query}" 😕
+        </div>
+      ) : (
+        <div className="w-full mt-4 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 gap-4">
+          {names.map((movie, index) => (
+            <div key={index} className="mt-2.5">
+              <div
+                className="flex flex-col items-center cursor-pointer"
+                onClick={() => {
+                  const year = new Date(movie.release_date).getFullYear();
+                  const url = `/player?movieId=${
+                    movie.id
+                  }&movieName=${encodeURIComponent(
+                    movie.name || movie.title
+                  )}&movieoverview=${encodeURIComponent(
+                    movie.overview
+                  )}&poster=${movie.poster_path}&release=${year}`;
+                  window.open(url, "_blank");
+                }}
+              >
+                <img
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : noposter
+                  }
+                  alt={movie.name || movie.title}
+                  className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
+                />
+                <h4 className="font-medium text-xl">
+                  {movie.name || movie.title}
+                </h4>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };
