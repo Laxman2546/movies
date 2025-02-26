@@ -41,6 +41,11 @@ const Webseries = () => {
       );
     } catch (error) {
       console.error("Error fetching data:", error);
+      return (
+        <>
+          <p>something went wrong</p>
+        </>
+      );
     }
 
     setLoading(false);
@@ -75,39 +80,49 @@ const Webseries = () => {
   return (
     <>
       <Navbar />
-      <div className="webseriesList grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-1.5 ml-3 pt-2">
-        {webnames.map((webname, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center cursor-pointer"
-          >
-            <img
-              src={
-                webname.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${webname.poster_path}`
-                  : noposter
-              }
-              alt={webname.name}
-              className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
-              onClick={() => {
-                const year = new Date(webname.first_air_date).getFullYear();
-                const url = `/player?seriesId=${
-                  webname.id
-                }&seriesname=${encodeURIComponent(
-                  webname.name
-                )}&seriesyear=${encodeURIComponent(
-                  year
-                )}&poster=${encodeURIComponent(webname.poster_path)}
+      {loading && webnames.length === 0 ? (
+        <div className="text-center text-xl font-semibold mt-10">
+          Loading...
+        </div>
+      ) : webnames.length === 0 ? (
+        <div className="text-center text-xl font-semibold mt-10">
+          No results found for "{query}" 😕
+        </div>
+      ) : (
+        <div className="webseriesList grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-1.5 ml-3 pt-2">
+          {webnames.map((webname, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center cursor-pointer"
+            >
+              <img
+                src={
+                  webname.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${webname.poster_path}`
+                    : noposter
+                }
+                alt={webname.name}
+                className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
+                onClick={() => {
+                  const year = new Date(webname.first_air_date).getFullYear();
+                  const url = `/player?seriesId=${
+                    webname.id
+                  }&seriesname=${encodeURIComponent(
+                    webname.name
+                  )}&seriesyear=${encodeURIComponent(
+                    year
+                  )}&poster=${encodeURIComponent(webname.poster_path)}
                 &seriesoverview=${encodeURIComponent(webname.overview)}`;
-                window.open(url, "_blank");
-              }}
-            />
-            <h1 className="lg:text-xl md:text-lg sm:text-sm font-medium">
-              {webname.name}
-            </h1>
-          </div>
-        ))}
-      </div>
+                  window.open(url, "_blank");
+                }}
+              />
+              <h1 className="lg:text-xl md:text-lg sm:text-sm font-medium">
+                {webname.name}
+              </h1>
+            </div>
+          ))}
+        </div>
+      )}
 
       {loading && <p className="text-center text-gray-500 mt-4">Loading...</p>}
     </>

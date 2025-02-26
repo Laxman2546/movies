@@ -13,13 +13,23 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
+    "anigo-anime-api": "^1.0.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "gogoanime": "^1.0.2",
+    "gogoanime-api-new": "^1.0.27",
     "lucide-react": "^0.475.0",
+    "node-fetch": "^3.3.2",
+    "process": "^0.11.10",
+    "puppeteer": "^24.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "react-spinners-kit": "^1.9.1",
-    "tailwindcss": "^4.0.6"
+    "request": "^2.88.2",
+    "tailwindcss": "^4.0.6",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",

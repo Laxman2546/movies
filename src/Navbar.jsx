@@ -33,6 +33,8 @@ const Navbar = () => {
     setIsSearch(false);
     location.pathname.includes("webseries")
       ? navigate("/webseries")
+      : location.pathname.includes("anime")
+      ? navigate("/anime")
       : navigate("/");
   };
   return (
@@ -44,7 +46,7 @@ const Navbar = () => {
       <div className="hidden md:flex gap-8 text-gray-700 dark:text-gray-300">
         <Link to="/">Home</Link>
         <Link to="/">Trending</Link>
-        <Link to="/">Anime</Link>
+        <Link to="/anime">Anime</Link>
         <Link to="/webseries">Webseries</Link>
       </div>
 
@@ -63,6 +65,8 @@ const Navbar = () => {
             placeholder={
               location.pathname.includes("webseries")
                 ? "Search Webseries"
+                : location.pathname.includes("anime")
+                ? "Search Anime"
                 : "Search Movie"
             }
             value={search}
@@ -107,7 +111,7 @@ const Navbar = () => {
           <Link to="/" onClick={() => setIsOpen(false)}>
             Trending
           </Link>
-          <Link to="/" onClick={() => setIsOpen(false)}>
+          <Link to="/anime" onClick={() => setIsOpen(false)}>
             Anime
           </Link>
           <Link to="/webseries" onClick={() => setIsOpen(false)}>
@@ -122,6 +126,8 @@ const Navbar = () => {
                 placeholder={
                   location.pathname.includes("webseries")
                     ? "Search Webseries"
+                    : location.pathname.includes("anime")
+                    ? "Search Anime"
                     : "Search Movie"
                 }
                 value={search}
