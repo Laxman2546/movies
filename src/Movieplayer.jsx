@@ -21,7 +21,10 @@ const Movieplayer = () => {
   const animeId = searchParams.get("animeId");
   const animename = searchParams.get("animename");
   const animeYear = searchParams.get("animeYear");
-
+  const horrorId = searchParams.get("horrorId");
+  const horrorname = searchParams.get("horrorname");
+  const horroryear = searchParams.get("horroryear");
+  console.log(horrorname, horroryear);
   const handlePlayer = (playerName) => {
     setLoading(true);
     setPlayer(playerName);
@@ -48,11 +51,13 @@ const Movieplayer = () => {
           <iframe
             src={
               player === "Server1"
-                ? `https://vidsrc.xyz/embed/movie/${movieId}`
+                ? `https://vidsrc.xyz/embed/movie/${
+                    movieId || seriesId || animeId || horrorId
+                  }`
                 : player === "Server2(MULTI-LANG)"
                 ? `https://player4u.xyz/embed?key=${
-                    movieName || seriesname || animename
-                  }+${release || seriesyear || animeYear}`
+                    movieName || seriesname || animename || horrorname
+                  }+${release || seriesyear || animeYear || horroryear}`
                 : ""
             }
             className="absolute top-0 left-0 w-full h-full"
