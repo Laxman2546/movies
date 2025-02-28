@@ -18,11 +18,14 @@ const Movieplayer = () => {
   const seriesname = searchParams.get("seriesname");
   const seriesyear = searchParams.get("seriesyear");
   const seriesoverview = searchParams.get("seriesoverview");
+  const animeId = searchParams.get("animeId");
+  const animename = searchParams.get("animename");
+  const animeYear = searchParams.get("animeYear");
 
   const handlePlayer = (playerName) => {
     setLoading(true);
-    setPlayer(playerName); 
-    setActive(playerName); 
+    setPlayer(playerName);
+    setActive(playerName);
   };
 
   useEffect(() => {
@@ -47,9 +50,9 @@ const Movieplayer = () => {
               player === "Server1"
                 ? `https://vidsrc.xyz/embed/movie/${movieId}`
                 : player === "Server2(MULTI-LANG)"
-                ? `https://player4u.xyz/embed?key=${movieName || seriesname}+${
-                    release || seriesyear
-                  }`
+                ? `https://player4u.xyz/embed?key=${
+                    movieName || seriesname || animename
+                  }+${release || seriesyear || animeYear}`
                 : ""
             }
             className="absolute top-0 left-0 w-full h-full"
@@ -95,6 +98,7 @@ const Movieplayer = () => {
           seriesname,
           seriesyear,
           seriesoverview,
+          animeId,
         }}
       />
     </>

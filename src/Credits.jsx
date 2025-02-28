@@ -31,9 +31,9 @@ const Credits = ({ id }) => {
 
         if (!data.cast || data.cast.length === 0) {
           setError("No cast information available.");
-          setcastDatas([]); // Ensure state is empty
+          setcastDatas([]); 
         } else {
-          setError(null); // Clear any previous errors
+          setError(null); 
           setcastDatas(data.cast);
         }
       } catch (error) {

@@ -5,9 +5,11 @@ const Moviedetails = ({ moviedetails }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const movieId = moviedetails.movieId;
   const seriesId = moviedetails.seriesId;
+  const animeId = moviedetails.animeId;
   useEffect(() => {
-    if (movieId || seriesId) setSelectedMovie(movieId || seriesId);
-  }, [movieId, seriesId]);
+    if (movieId || seriesId || animeId)
+      setSelectedMovie(movieId || seriesId || animeId);
+  }, [movieId, seriesId, animeId]);
 
   return (
     <div className="main p-5 w-full md:p-10 sm:p-0 ">

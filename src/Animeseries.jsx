@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 const Animeseries = () => {
   const [animeLists, setAnimeLists] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -17,13 +18,13 @@ const Animeseries = () => {
       return;
     }
 
-    const fetchAnime = async () => {
+    const fetchAnime = async (page) => {
       setLoading(true);
       setError(null);
 
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/tv?with_genres=16&sort_by=popularity.desc&page=1`,
+          `https://api.themoviedb.org/3/discover/movie?with_genres=16&sort_by=popularity.desc&page=${page}`,
           {
             method: "GET",
             headers: {
@@ -44,7 +45,7 @@ const Animeseries = () => {
           return;
         }
         console.log(data);
-        setAnimeLists(data.results);
+        setAnimeLists((prev) => [...prev, ...data.results]);
       } catch (error) {
         console.error("Error fetching anime:", error);
         setError("Failed to load anime. Please try again later.");
@@ -53,8 +54,23 @@ const Animeseries = () => {
       }
     };
 
-    fetchAnime();
-  }, [movieApi]);
+    fetchAnime(page);
+  }, [movieApi, page]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (loading) return;
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 10
+      ) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loading]);
 
   return (
     <>
@@ -63,27 +79,36 @@ const Animeseries = () => {
 
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-4">
         {animeLists.length > 0
-          ? animeLists.map((anime) => (
+          ? animeLists.map((anime, index) => (
               <div
                 className="flex flex-col items-center cursor-pointer"
-                key={anime.id}
-                onClick={() =>
+                key={index}
+                onClick={() => {
+                  const year = new Date(anime.release_date).getFullYear();
                   navigate(
-                    `/animeplayer?animeId=${anime.id}&animename=${anime.name}&episode=${anime.episode}`
-                  )
-                }
+                    `/player?animeId=${anime.id}&animename=${
+                      anime.original_title
+                    }&animeYear=${encodeURIComponent(
+                      year
+                    )}&poster=${encodeURIComponent(anime.poster_path)}
+                    &movieoverview=${encodeURIComponent(
+                      anime.overview
+                    )}&release=${encodeURIComponent(year)}
+                    `
+                  );
+                }}
               >
                 <img
                   src={
                     anime.poster_path
                       ? `https://image.tmdb.org/t/p/w185/${anime.poster_path}`
                       : "/placeholder-image.jpg"
-                  } // Use a fallback image
-                  alt={anime.name || "Unknown Anime"}
+                  }
+                  alt={anime.original_title || "Unknown Anime"}
                   className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
                 />
                 <h1 className="lg:text-xl md:text-lg sm:text-sm font-medium text-center">
-                  {anime.name || "Unknown Anime"}
+                  {anime.original_title || "Unknown Anime"}
                 </h1>
               </div>
             ))
