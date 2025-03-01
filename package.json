@@ -28,6 +28,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "react-spinners-kit": "^1.9.1",
+    "react-toggle-dark-mode": "^1.1.1",
     "request": "^2.88.2",
     "tailwindcss": "^4.0.6",
     "util": "^0.12.5"

@@ -3,12 +3,13 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import sun from "./assets/sun.png";
 import moon from "./assets/moon.png";
-
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [mode, setMode] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
+  const [isDarkMode, setDarkMode] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,6 +24,7 @@ const Navbar = () => {
         ? "webseries"
         : "";
       navigate(`/${searchType}?query=${search}`);
+      setIsOpen(false);
     }
     if (search.length === 0) {
       console.log("it was an empty");
@@ -35,7 +37,13 @@ const Navbar = () => {
       ? navigate("/webseries")
       : location.pathname.includes("anime")
       ? navigate("/anime")
+      : location.pathname.includes("trending")
+      ? navigate("/trending")
       : navigate("/");
+  };
+
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
   };
   return (
     <nav className="p-5 flex justify-between items-center bg-gray-100 dark:bg-gray-900 sticky top-0 z-20">
@@ -67,6 +75,8 @@ const Navbar = () => {
                 ? "Search Webseries"
                 : location.pathname.includes("anime")
                 ? "Search Anime"
+                : location.pathname.includes("trending")
+                ? "search horror"
                 : "Search Movie"
             }
             value={search}
@@ -99,8 +109,13 @@ const Navbar = () => {
           width={20}
           height={20}
           className="cursor-pointer p-1 bg-blue-50 rounded-xl"
-          onClick={() => setMode((prev) => !prev)}
         />
+        {/* <DarkModeSwitch
+          style={{ marginBottom: "2rem" }}
+          checked={isDarkMode}
+          onChange={toggleDarkMode}
+          size={25}
+        /> */}
       </div>
 
       {isOpen && (
@@ -108,8 +123,8 @@ const Navbar = () => {
           <Link to="/" onClick={() => setIsOpen(false)}>
             Home
           </Link>
-          <Link to="/" onClick={() => setIsOpen(false)}>
-            Trending
+          <Link to="/trending" onClick={() => setIsOpen(false)}>
+            Horror
           </Link>
           <Link to="/anime" onClick={() => setIsOpen(false)}>
             Anime
@@ -165,6 +180,12 @@ const Navbar = () => {
               className="cursor-pointer p-1 bg-blue-50 rounded-xl"
               onClick={() => setMode((prev) => !prev)}
             />
+            {/* <DarkModeSwitch
+              style={{ marginBottom: "2rem" }}
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+              size={120}
+            /> */}
           </div>
         </div>
       )}

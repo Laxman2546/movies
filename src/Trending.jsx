@@ -52,7 +52,7 @@ const Trending = () => {
   return (
     <>
       <Navbar />
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-1.5 ml-3 pt-2">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2">
         {results.map((result, index) => (
           <div
             key={index}
@@ -79,7 +79,7 @@ const Trending = () => {
                 window.open(url, "_blank");
               }}
             />
-            <h1 className="lg:text-xl md:text-lg sm:text-sm font-medium">
+            <h1 className="font-medium lg:text-xl md:text-lg sm:text-base">
               {result.title || "unkowntitle"}
             </h1>
           </div>

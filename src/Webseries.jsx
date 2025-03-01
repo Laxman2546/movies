@@ -89,7 +89,7 @@ const Webseries = () => {
           No results found for "{query}" 😕
         </div>
       ) : (
-        <div className="webseriesList grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-1.5 ml-3 pt-2">
+        <div className="webseriesList grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2">
           {webnames.map((webname, index) => (
             <div
               key={index}
@@ -116,7 +116,7 @@ const Webseries = () => {
                   window.open(url, "_blank");
                 }}
               />
-              <h1 className="lg:text-xl md:text-lg sm:text-sm font-medium">
+              <h1 className="font-medium lg:text-xl md:text-lg sm:text-base">
                 {webname.name}
               </h1>
             </div>
