@@ -46,7 +46,7 @@ const Navbar = () => {
     setDarkMode(checked);
   };
   return (
-    <nav className="p-5 flex justify-between items-center bg-gray-100 dark:bg-gray-900 sticky top-0 z-20">
+    <nav className="p-5 flex justify-between items-center bg-gray-100 dark:bg-gray-900 sticky top-0 z-20 bg-gray-200">
       <h1 className="font-bold text-2xl text-gray-800 dark:text-white">
         NaniMovies
       </h1>
@@ -119,7 +119,7 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-100 dark:bg-gray-900 md:hidden flex flex-col items-center py-5 gap-5 text-gray-800 dark:text-gray-300 z-50">
+        <div className="absolute top-16 left-0 w-full bg-gray-200 dark:bg-gray-900 md:hidden flex flex-col items-center py-5 gap-5 text-gray-800 dark:text-gray-300 z-50">
           <Link to="/" onClick={() => setIsOpen(false)}>
             Home
           </Link>
