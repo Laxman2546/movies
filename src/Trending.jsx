@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import noposter from "./assets/noposter.jpg";
-import { useNavigate } from "react-router-dom";
 
 const Trending = () => {
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const movieApi = import.meta.env.VITE_APP_MOVIE_ACCESS_KEY;
-  const navigate = useNavigate();
 
   const fetchHorror = async (pagenumber) => {
     if (loading) return;
