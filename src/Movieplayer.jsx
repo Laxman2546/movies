@@ -9,6 +9,7 @@ const Movieplayer = () => {
   const [active, setActive] = useState("Server1");
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+
   const movieName = searchParams.get("movieName");
   const poster = searchParams.get("poster");
   const movieoverview = searchParams.get("movieoverview");
@@ -24,7 +25,7 @@ const Movieplayer = () => {
   const horrorId = searchParams.get("horrorId");
   const horrorname = searchParams.get("horrorname");
   const horroryear = searchParams.get("horroryear");
-  console.log(horrorname, horroryear);
+
   const handlePlayer = (playerName) => {
     setLoading(true);
     setPlayer(playerName);
@@ -44,9 +45,29 @@ const Movieplayer = () => {
     <>
       <Navbar />
 
-      <div className="main relative overflow-hidden pt-[56.25%] sm:pt-[75%] md:pt-[66.66%] flex justify-center items-center">
+
+      {/* Iframe Player */}
+      <div
+        style={{
+          position: "relative",
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          overflow: "hidden",
+        }}
+      >
         {loading ? (
-          <div className="text-center text-xl font-semibold">Loading...</div>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+            }}
+          >
+            Loading...
+          </div>
         ) : (
           <iframe
             src={
@@ -60,34 +81,40 @@ const Movieplayer = () => {
                   }+${release || seriesyear || animeYear || horroryear}`
                 : ""
             }
-            className="absolute top-0 left-0 w-full h-full"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              border: "none",
+              objectFit: "cover",
+              aspectRatio: "16 / 9",
+            }}
             title="Movie Player"
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            scrolling="no"
             allowFullScreen
           ></iframe>
         )}
       </div>
-
-      <div className="servers w-full p-5">
-        <h1 className="font-bold text-lg">
+      {/* Server Buttons */}
+      <div style={{ width: "100%", padding: "20px", textAlign: "center" }}>
+        <h1 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
           If the movie is not found, try another server:
         </h1>
-        <div className="serverBtns">
+        <div>
           {servers.map((server, index) => (
             <button
               key={index}
               onClick={() => handlePlayer(server)}
               style={{
-                padding: "0.5rem",
-                margin: "0.5rem",
-                borderRadius: "0.5rem",
+                padding: "10px",
+                margin: "10px",
+                borderRadius: "8px",
                 cursor: "pointer",
                 transition: "all 0.3s ease",
-                backgroundColor: active === server ? "#22C55E" : "#3B82F6", 
+                backgroundColor: active === server ? "#22C55E" : "#3B82F6",
                 color: "#FFFFFF",
+                fontSize: "1rem",
               }}
             >
               {server.toUpperCase()}
