@@ -123,7 +123,14 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-800 dark:bg-gray-900 md:hidden flex flex-col items-center py-5 gap-5 text-gray-200 dark:text-gray-300 z-50">
+        <div
+          className="absolute top-16 left-0 w-full  -900 md:hidden flex flex-col items-center py-5 gap-5   z-50"
+          style={{
+            backgroundColor: mode ? "#111827" : "#111827",
+            color: mode ? "#fff" : "#fff",
+            zIndex: 20,
+          }}
+        >
           <Link to="/" onClick={() => setIsOpen(false)}>
             Home
           </Link>
@@ -142,6 +149,9 @@ const Navbar = () => {
               <input
                 type="text"
                 className="p-2 border rounded-xl relative"
+                style={{
+                  color: "#fff",
+                }}
                 placeholder={
                   location.pathname.includes("webseries")
                     ? "Search Webseries"
