@@ -3,13 +3,11 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import sun from "./assets/sun.png";
 import moon from "./assets/moon.png";
-import { DarkModeSwitch } from "react-toggle-dark-mode";
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [mode, setMode] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  const [isDarkMode, setDarkMode] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -46,12 +44,22 @@ const Navbar = () => {
     setDarkMode(checked);
   };
   return (
-    <nav className="p-5 flex justify-between items-center  dark:bg-gray-900 sticky top-0 z-20 bg-gray-200">
-      <h1 className="font-bold text-2xl text-gray-800 dark:text-white">
-        NaniMovies
+    <nav
+      className="p-5 flex justify-between items-center  dark:bg-gray-900 sticky top-0 z-20 bg-gray-200"
+      style={{
+        backgroundColor: mode ? "#111827" : "#111827",
+        color: mode ? "#000" : "#fff",
+        padding: "20px",
+        position: "sticky",
+        top: 0,
+        zIndex: 20,
+      }}
+    >
+      <h1 className="font-bold text-2xl text-white">
+        <Link to="/">NaniMovies</Link>
       </h1>
 
-      <div className="hidden md:flex gap-8 text-gray-700 dark:text-gray-300">
+      <div className="hidden md:flex gap-8 text-white">
         <Link to="/">Home</Link>
         <Link to="/trending">Horror</Link>
         <Link to="/anime">Anime</Link>
@@ -59,7 +67,7 @@ const Navbar = () => {
       </div>
 
       <button
-        className="md:hidden text-gray-700 dark:text-white"
+        className="md:hidden text-white"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -69,7 +77,7 @@ const Navbar = () => {
         <div className="input relative">
           <input
             type="text"
-            className="p-2 border rounded-xl"
+            className="p-2 border rounded-xl text-white"
             placeholder={
               location.pathname.includes("webseries")
                 ? "Search Webseries"
@@ -97,10 +105,11 @@ const Navbar = () => {
           )}
         </div>
         <img
-          src="https://img.icons8.com/ios-filled/50/search--v2.png"
+          src="https://img.icons8.com/material-sharp/24/search.png"
           width={20}
           height={20}
           className="cursor-pointer"
+          style={{ filter: "invert(1)" }}
           onClick={handleSearch}
         />
         <img
@@ -109,13 +118,8 @@ const Navbar = () => {
           width={20}
           height={20}
           className="cursor-pointer p-1 bg-blue-50 rounded-xl"
+          onClick={() => setMode((prev) => !prev)}
         />
-        {/* <DarkModeSwitch
-          style={{ marginBottom: "2rem" }}
-          checked={isDarkMode}
-          onChange={toggleDarkMode}
-          size={25}
-        /> */}
       </div>
 
       {isOpen && (
@@ -163,13 +167,14 @@ const Navbar = () => {
               )}
             </div>
             <img
-              src="https://img.icons8.com/ios-filled/50/search--v2.png"
+              src="https://img.icons8.com/material-sharp/24/search.png"
               width={20}
               height={20}
               className={`cursor-pointer ${
                 !search.trim() ? "opacity-50 cursor-not-allowed" : ""
               }`}
               onClick={handleSearch}
+              style={{ filter: "invert(1)" }}
             />
 
             <img
@@ -180,12 +185,6 @@ const Navbar = () => {
               className="cursor-pointer p-1 bg-blue-50 rounded-xl"
               onClick={() => setMode((prev) => !prev)}
             />
-            {/* <DarkModeSwitch
-              style={{ marginBottom: "2rem" }}
-              checked={isDarkMode}
-              onChange={toggleDarkMode}
-              size={120}
-            /> */}
           </div>
         </div>
       )}

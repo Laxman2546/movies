@@ -77,7 +77,7 @@ const Animeseries = () => {
       <Navbar />
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-4 gap-1.5 ml-3 pt-2">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2">
         {animeLists.length > 0
           ? animeLists.map((anime, index) => (
               <div
@@ -107,7 +107,7 @@ const Animeseries = () => {
                   alt={anime.original_title || "Unknown Anime"}
                   className="w-[150px] sm:w-[120px] md:w-[200px] h-auto rounded-lg"
                 />
-                <h1 className="font-medium lg:text-xl md:text-lg sm:text-base">
+                <h1 className="font-medium lg:text-xl md:text-base sm:xsm">
                   {anime.original_title || "Unknown Anime"}
                 </h1>
               </div>

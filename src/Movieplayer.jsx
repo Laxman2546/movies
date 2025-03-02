@@ -80,11 +80,15 @@ const Movieplayer = () => {
             <button
               key={index}
               onClick={() => handlePlayer(server)}
-              className={`p-2 rounded m-2 transition-all cursor-pointer ${
-                active === server
-                  ? "bg-green-500 text-white"
-                  : "bg-blue-500 text-white hover:bg-blue-600"
-              }`}
+              style={{
+                padding: "0.5rem",
+                margin: "0.5rem",
+                borderRadius: "0.5rem",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                backgroundColor: active === server ? "#22C55E" : "#3B82F6", 
+                color: "#FFFFFF",
+              }}
             >
               {server.toUpperCase()}
             </button>
