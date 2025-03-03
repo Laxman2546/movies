@@ -8,7 +8,7 @@ import Stopper from "./Stopper";
 const App = () => {
   return (
     <>
-      {/* <Stopper />; */}
+      <Stopper />;
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
