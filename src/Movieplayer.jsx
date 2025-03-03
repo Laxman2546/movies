@@ -45,7 +45,6 @@ const Movieplayer = () => {
     <>
       <Navbar />
 
-
       {/* Iframe Player */}
       <div
         style={{
@@ -78,7 +77,7 @@ const Movieplayer = () => {
                 : player === "Server2(MULTI-LANG)"
                 ? `https://player4u.xyz/embed?key=${
                     movieName || seriesname || animename || horrorname
-                  }+${release || seriesyear || animeYear || horroryear}`
+                  }`
                 : ""
             }
             style={{
