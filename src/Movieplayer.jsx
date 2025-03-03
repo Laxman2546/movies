@@ -39,7 +39,7 @@ const Movieplayer = () => {
     return () => clearTimeout(timer);
   }, [player]);
 
-  const servers = ["Server1", "Server2(MULTI-LANG)"];
+  const servers = ["Server1", "Server2(MULTI-LANG)", "Server3"];
 
   return (
     <>
@@ -77,7 +77,11 @@ const Movieplayer = () => {
                 : player === "Server2(MULTI-LANG)"
                 ? `https://player4u.xyz/embed?key=${
                     movieName || seriesname || animename || horrorname
-                  }`
+                  }+${release || seriesyear || animeYear || horroryear}`
+                : player === "Server3"
+                ? `https://player4u.xyz/embed?key=${
+                    movieName || seriesname || animename || horrorname
+                  }+(${release || seriesyear || animeYear || horroryear})`
                 : ""
             }
             style={{
