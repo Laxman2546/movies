@@ -40,12 +40,9 @@ const Navbar = () => {
       : navigate("/");
   };
 
-  const toggleDarkMode = (checked) => {
-    setDarkMode(checked);
-  };
   return (
     <nav
-      className="p-5 flex justify-between items-center  dark:bg-gray-900 sticky top-0 z-20 bg-gray-200"
+      className=" w-full p-5 flex justify-between items-center  dark:bg-gray-900 sticky top-0 z-20 bg-gray-200"
       style={{
         backgroundColor: mode ? "#111827" : "#111827",
         color: mode ? "#000" : "#fff",

@@ -69,6 +69,9 @@ const Movieplayer = () => {
           </div>
         ) : (
           <iframe
+            allow="autoplay; fullscreen; encrypted-media"
+            referrerPolicy="origin"
+            loading="lazy"
             src={
               player === "Server1"
                 ? `https://vidsrc.xyz/embed/movie/${
@@ -99,7 +102,6 @@ const Movieplayer = () => {
           ></iframe>
         )}
       </div>
-      {/* Server Buttons */}
       <div style={{ width: "100%", padding: "20px", textAlign: "center" }}>
         <h1 style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
           If the movie is not found, try another server:
