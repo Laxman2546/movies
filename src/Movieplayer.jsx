@@ -38,6 +38,8 @@ const Movieplayer = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [player]);
+  const names = movieName || seriesname || animename || horrorname;
+  const movieNames = names.split(":").join("");
 
   const servers = ["Server1", "Server2(MULTI-LANG)", "Server3"];
 
@@ -78,13 +80,13 @@ const Movieplayer = () => {
                     movieId || seriesId || animeId || horrorId
                   }`
                 : player === "Server2(MULTI-LANG)"
-                ? `https://player4u.xyz/embed?key=${
-                    movieName || seriesname || animename || horrorname
-                  }+${release || seriesyear || animeYear || horroryear}`
+                ? `https://player4u.xyz/embed?key=${movieNames}+${
+                    release || seriesyear || animeYear || horroryear
+                  }`
                 : player === "Server3"
-                ? `https://player4u.xyz/embed?key=${
-                    movieName || seriesname || animename || horrorname
-                  }+(${release || seriesyear || animeYear || horroryear})`
+                ? `https://player4u.xyz/embed?key=${movieNames}+(${
+                    release || seriesyear || animeYear || horroryear
+                  })`
                 : ""
             }
             style={{
