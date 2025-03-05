@@ -12,3 +12,18 @@
 .castimg::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker when hovered */
 }
+
+body {
+  width: 99vw;
+  height: 100vh;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+}

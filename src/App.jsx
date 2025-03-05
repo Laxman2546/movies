@@ -9,15 +9,13 @@ const App = () => {
   return (
     <>
       <Stopper />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/player" element={<Movieplayer />} />
-          <Route path="/webseries" element={<Webseries />} />
-          <Route path="/trending" element={<Trending />} />
-          <Route path="/anime" element={<Animeseries />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/player" element={<Movieplayer />} />
+        <Route path="/webseries" element={<Webseries />} />
+        <Route path="/trending" element={<Trending />} />
+        <Route path="/anime" element={<Animeseries />} />
+      </Routes>
     </>
   );
 };

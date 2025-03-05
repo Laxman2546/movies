@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import noposter from "./assets/noposter.jpg";
-import Stopper from "./Stopper";
 const Home = () => {
   const [names, setNames] = useState([]);
   const [page, setPage] = useState(1);
