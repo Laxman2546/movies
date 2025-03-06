@@ -57,6 +57,7 @@ const Movieplayer = () => {
           justifyContent: "center",
           alignItems: "center",
           overflow: "hidden",
+          marginTop: "90px"
         }}
       >
         {loading ? (
