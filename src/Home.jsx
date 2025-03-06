@@ -70,7 +70,6 @@ const Home = () => {
 
   return (
     <>
-      <Stopper />
       <Navbar />
       {loading && names.length === 0 ? (
         <div className="text-center text-xl font-semibold mt-25">
