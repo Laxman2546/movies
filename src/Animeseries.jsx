@@ -77,7 +77,7 @@ const Animeseries = () => {
       <Navbar />
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2 mt-25">
         {animeLists.length > 0
           ? animeLists.map((anime, index) => (
               <div

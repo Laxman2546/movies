@@ -52,8 +52,8 @@ const Trending = () => {
   return (
     <>
       <Navbar />
-      <Sliding />
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2">
+      {/* <Sliding /> */}
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2 mt-25">
         {results.map((result, index) => (
           <div
             key={index}

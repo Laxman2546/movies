@@ -42,9 +42,9 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="conatiner fixed top-0 w-full ">
+      <div className="conatiner fixed top-0 w-full z-20">
         <nav
-          className=" w-full p-5 flex justify-between items-center  dark:bg-gray-900 sticky top-0 z-20 bg-gray-200"
+          className=" w-full p-5 flex justify-between items-center  dark:bg-gray-900  z-20 bg-gray-200"
           style={{
             backgroundColor: mode ? "#111827" : "#111827",
             color: mode ? "#000" : "#fff",
@@ -83,7 +83,7 @@ const Navbar = () => {
                     : location.pathname.includes("anime")
                     ? "Search Anime"
                     : location.pathname.includes("trending")
-                    ? "search horror"
+                    ? "search Horror"
                     : "Search Movie"
                 }
                 value={search}

@@ -81,15 +81,15 @@ const Webseries = () => {
     <>
       <Navbar />
       {loading && webnames.length === 0 ? (
-        <div className="text-center text-xl font-semibold mt-10">
+        <div className="text-center text-xl font-semibold mt-25">
           Loading...
         </div>
       ) : webnames.length === 0 ? (
-        <div className="text-center text-xl font-semibold mt-10">
+        <div className="text-center text-xl font-semibold mt-25">
           No results found for "{query}" 😕
         </div>
       ) : (
-        <div className="webseriesList grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2">
+        <div className="webseriesList grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2 mt-25">
           {webnames.map((webname, index) => (
             <div
               key={index}
