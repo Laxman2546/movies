@@ -9,7 +9,7 @@ import Cricket from "./Cricket.jsx";
 const App = () => {
   return (
     <>
-      {/* <Stopper /> */}
+      <Stopper />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/player" element={<Movieplayer />} />

@@ -45,7 +45,7 @@ const Cricket = () => {
           allow="encrypted-media"
         ></iframe>
       </div>
-      <div className="buttons w-full flex items-center justify-center gap-2.5">
+      <div className="buttons w-full flex flex-wrap items-center justify-center gap-2.5">
         {servers.map((server, index) => (
           <button
             key={index}
