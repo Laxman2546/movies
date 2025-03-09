@@ -63,6 +63,7 @@ const Navbar = () => {
             <Link to="/trending">Horror</Link>
             <Link to="/anime">Anime</Link>
             <Link to="/webseries">Webseries</Link>
+            <Link to="/cricket">Sports</Link>
           </div>
 
           <button
@@ -141,6 +142,9 @@ const Navbar = () => {
               </Link>
               <Link to="/webseries" onClick={() => setIsOpen(false)}>
                 Webseries
+              </Link>
+              <Link to="/cricket" onClick={() => setIsOpen(false)}>
+                Sports
               </Link>
 
               <div className="flex items-center gap-3">
