@@ -68,7 +68,7 @@ const Movieplayer = () => {
               fontWeight: "bold",
             }}
           >
-            Loading...
+            Loading...😉
           </div>
         ) : (
           <iframe
