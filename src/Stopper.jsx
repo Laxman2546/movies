@@ -9,28 +9,28 @@ const Stopper = () => {
       event.preventDefault();
     if (event.ctrlKey && event.key === "U") event.preventDefault();
   });
-  (function detectDevTools() {
-    const element = new Image();
-    Object.defineProperty(element, "id", {
-      get: function () {
-        window.location.href = "https://www.google.com";
-      },
-    });
-    console.log("%c", element);
-  })();
-  setInterval(function () {
-    if (window.outerWidth - window.innerWidth > 200) {
-      window.location.href = "https://www.google.com";
-    }
-  }, 1000);
-  setInterval(function () {
-    const before = new Date();
-    debugger;
-    const after = new Date();
-    if (after - before > 100) {
-      window.location.href = "https://www.google.com";
-    }
-  }, 1000);
+  // (function detectDevTools() {
+  //   const element = new Image();
+  //   Object.defineProperty(element, "id", {
+  //     get: function () {
+  //       window.location.href = "https://www.google.com";
+  //     },
+  //   });
+  //   console.log("%c", element);
+  // })();
+  // setInterval(function () {
+  //   if (window.outerWidth - window.innerWidth > 200) {
+  //     window.location.href = "https://www.google.com";
+  //   }
+  // }, 1000);
+  // setInterval(function () {
+  //   const before = new Date();
+  //   debugger;
+  //   const after = new Date();
+  //   if (after - before > 100) {
+  //     window.location.href = "https://www.google.com";
+  //   }
+  // }, 1000);
   return <></>;
 };
 export default Stopper;
