@@ -20,7 +20,7 @@ const Home = () => {
         }?query=${query}&page=${pageNumber}`
       : `https://api.themoviedb.org/3/discover/${
           isTV ? "tv" : "movie"
-        }?include_adult=false&with_original_language=te&page=${pageNumber}&sort_by=popularity.desc`;
+        }?include_adult=false&with_original_language=te&page=${pageNumber}&sort_by=release_date.desc`;
 
     try {
       const response = await fetch(url, {
