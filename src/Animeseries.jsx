@@ -24,14 +24,7 @@ const Animeseries = () => {
 
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?with_genres=16&sort_by=popularity.desc&page=${page}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${movieApi}`,
-              Accept: "application/json",
-            },
-          }
+          `https://nanimoviesapi.vercel.app/anime/${page}`
         );
 
         if (!response.ok) {

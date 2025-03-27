@@ -13,15 +13,9 @@ const Trending = () => {
     if (loading) return;
     setLoading(true);
 
-    const url = `https://api.themoviedb.org/3/discover/movie?&with_genres=27&page=${pagenumber}`;
+    const url = `https://nanimoviesapi.vercel.app/horror/${pagenumber}`;
     try {
-      const data = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${movieApi}`,
-          Accept: "application/json",
-        },
-      });
+      const data = await fetch(url);
       const response = await data.json();
       setResults((prev) => [...prev, ...response.results]);
     } catch (error) {

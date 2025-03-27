@@ -15,22 +15,11 @@ const Home = () => {
     setLoading(true);
     const isTV = false;
     const url = query
-      ? `https://api.themoviedb.org/3/search/${
-          isTV ? "tv" : "movie"
-        }?query=${query}&page=${pageNumber}`
-      : `https://api.themoviedb.org/3/discover/${
-          isTV ? "tv" : "movie"
-        }?include_adult=false&with_original_language=te&page=${pageNumber}&sort_by=release_date.desc`;
+      ? `https://nanimoviesapi.vercel.app/search/movie/${query}/${pageNumber}`
+      : `https://nanimoviesapi.vercel.app/movies/${pageNumber}`;
 
     try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${movieApi}`,
-          Accept: "application/json",
-        },
-      });
-
+      const response = await fetch(url);
       const data = await response.json();
 
       setNames((prev) =>

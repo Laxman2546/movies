@@ -18,22 +18,11 @@ const Webseries = () => {
 
     const isTV = true;
     const url = query
-      ? `https://api.themoviedb.org/3/search/${
-          isTV ? "tv" : "movie"
-        }?query=${query}&page=${pageNumber}`
-      : `https://api.themoviedb.org/3/discover/${
-          isTV ? "tv" : "movie"
-        }?include_adult=false&with_original_language=te&page=${pageNumber}&sort_by=popularity.desc`;
+      ? `https://nanimoviesapi.vercel.app/search/tv/${query}/${pageNumber}`
+      : `https://nanimoviesapi.vercel.app/webseries/${pageNumber}`;
 
     try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${movieApi}`,
-          Accept: "application/json",
-        },
-      });
-
+      const response = await fetch(url);
       const data = await response.json();
 
       setWebnames((prev) =>
@@ -86,7 +75,7 @@ const Webseries = () => {
         </div>
       ) : webnames.length === 0 ? (
         <div className="text-center text-xl font-semibold mt-25">
-          No results found for "{query}" 😕
+          Is "{query}" a Webseries check the spell again! 😕
         </div>
       ) : (
         <div className="webseriesList grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-3 gap-1.5 ml-3 pt-2 mt-25">
