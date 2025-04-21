@@ -115,7 +115,7 @@ const Home = () => {
         </div>
       ) : (
         <div className="w-full flex flex-col">
-          {recentMovie && recentMovie.length > 0 && (
+          {recentMovie && recentMovie.length > 0 && !query && (
             <div className="w-full pt-[150px]">
               <h1 className="w-full pl-[50px] text-2xl font-extrabold">
                 Recently Watched
