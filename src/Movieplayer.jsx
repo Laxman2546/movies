@@ -57,7 +57,7 @@ const Movieplayer = () => {
           justifyContent: "center",
           alignItems: "center",
           overflow: "hidden",
-          marginTop: "90px"
+          marginTop: "90px",
         }}
       >
         {loading ? (
@@ -72,7 +72,7 @@ const Movieplayer = () => {
           </div>
         ) : (
           <iframe
-            allow="autoplay; fullscreen; encrypted-media"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;autoplay"
             referrerPolicy="origin"
             loading="lazy"
             src={

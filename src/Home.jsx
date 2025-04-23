@@ -175,6 +175,7 @@ const Home = () => {
               </div>
             </div>
           )}
+  
           <div className="w-full mt-25 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-3 gap-4 ">
             {names.map((movie, index) => (
               <div key={index} className="mt-2.5">

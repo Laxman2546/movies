@@ -22,7 +22,7 @@ const Cricket = () => {
         <iframe
           src={
             cricStream === "Server1"
-              ? "//stream.crichd.sc/update/star1hi.php"
+              ? `https://aparttent.com/footy.php?player=desktop&live=skyscric`
               : cricStream === "Server2"
               ? "https://cdn.crichdplays.ru/embed2.php?id=willowextra"
               : cricStream === "Server3"
@@ -42,7 +42,7 @@ const Cricket = () => {
           scrolling="no"
           frameborder="0"
           allowfullscreen=""
-          allow="encrypted-media"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
       </div>
       <div className="buttons w-full flex flex-wrap items-center justify-center gap-2.5">
