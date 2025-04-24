@@ -6,18 +6,44 @@ import Animeseries from "./Animeseries";
 import Trending from "./Trending.jsx";
 import Stopper from "./Stopper";
 import Cricket from "./Cricket.jsx";
+import Download from "./Download.jsx";
+import curtainVideo from "../src/assets/curtain.mp4";
+import { useEffect, useState } from "react";
+import DownloadPlayer from "./downloadPlayer.jsx";
+
 const App = () => {
+  const [curtain, setCurtain] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurtain(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
-      <Stopper />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/player" element={<Movieplayer />} />
-        <Route path="/webseries" element={<Webseries />} />
-        <Route path="/trending" element={<Trending />} />
-        <Route path="/anime" element={<Animeseries />} />
-        <Route path="/cricket" element={<Cricket />} />
-      </Routes>
+      {curtain ? (
+        <video
+          src={curtainVideo}
+          className="w-full h-screen object-fill"
+          autoPlay
+          muted
+          playsInline
+        ></video>
+      ) : (
+        <>
+          <Stopper />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/player" element={<Movieplayer />} />
+            <Route path="/downloadplayer" element={<DownloadPlayer />} />
+            <Route path="/webseries" element={<Webseries />} />
+            <Route path="/trending" element={<Trending />} />
+            <Route path="/anime" element={<Animeseries />} />
+            <Route path="/cricket" element={<Cricket />} />
+            <Route path="/download" element={<Download />} />
+          </Routes>
+        </>
+      )}
     </>
   );
 };

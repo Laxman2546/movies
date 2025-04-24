@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import noposter from "./assets/noposter.jpg";
+import loader from "./assets/loader.gif";
 const Home = () => {
   const [names, setNames] = useState([]);
   const [page, setPage] = useState(1);
@@ -106,8 +107,8 @@ const Home = () => {
     <>
       <Navbar />
       {loading && names.length === 0 ? (
-        <div className="text-center text-xl font-semibold mt-25">
-          Loading...
+        <div className="w-full flex items-center justify-center mt-25">
+          <img src={loader} className="w-[150px] h-[150px]" />
         </div>
       ) : query && names.length === 0 ? (
         <div className="text-center text-xl font-semibold mt-25">
@@ -175,7 +176,7 @@ const Home = () => {
               </div>
             </div>
           )}
-  
+
           <div className="w-full mt-25 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-3 gap-4 ">
             {names.map((movie, index) => (
               <div key={index} className="mt-2.5">

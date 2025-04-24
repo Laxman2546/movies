@@ -20,6 +20,8 @@ const Navbar = () => {
     if (search.trim()) {
       const searchType = location.pathname.includes("webseries")
         ? "webseries"
+        : location.pathname.includes("download")
+        ? "download"
         : "";
       navigate(`/${searchType}?query=${search}`);
       setIsOpen(false);
@@ -37,6 +39,8 @@ const Navbar = () => {
       ? navigate("/anime")
       : location.pathname.includes("trending")
       ? navigate("/trending")
+      : location.pathname.includes("download")
+      ? navigate("/download")
       : navigate("/");
   };
 
@@ -60,6 +64,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex gap-8 text-white">
             <Link to="/">Home</Link>
+            <Link to="/download">Download</Link>
             <Link to="/trending">Horror</Link>
             <Link to="/anime">Anime</Link>
             <Link to="/webseries">Webseries</Link>
@@ -98,7 +103,7 @@ const Navbar = () => {
                 <X
                   size={20}
                   onClick={() => handleCross()}
-                  className="absolute top-2.5 right-2 cursor-pointer"
+                  className="absolute top-2.5 right-2 cursor-pointer caret-blue-50"
                 />
               ) : (
                 ""
@@ -133,6 +138,9 @@ const Navbar = () => {
             >
               <Link to="/" onClick={() => setIsOpen(false)}>
                 Home
+              </Link>
+              <Link to="/download" onClick={() => setIsOpen(false)}>
+                DownloadMovies
               </Link>
               <Link to="/trending" onClick={() => setIsOpen(false)}>
                 Horror
@@ -173,7 +181,7 @@ const Navbar = () => {
                     <X
                       size={28}
                       onClick={() => handleCross()}
-                      className="absolute top-2 right-2  cursor-pointer"
+                      className="absolute top-2 right-2  cursor-pointer caret-blue-50"
                     />
                   ) : (
                     ""
