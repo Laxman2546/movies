@@ -69,7 +69,7 @@ const DownloadPlayer = () => {
                   onClick={() => window.open(torrent.magnet, "_blank")}
                 >
                   <h1 className="text-sm md:text-base font-medium">
-                    🎬 Quality: {torrent.quality}
+                    🎬 Quality : {torrent.quality}
                   </h1>
                   <h1 className="text-sm md:text-base font-medium">
                     💾 Size: {torrent.size}
