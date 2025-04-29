@@ -33,14 +33,14 @@ const App = () => {
         <>
           <Stopper />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/download" element={<Home />} />
             <Route path="/player" element={<Movieplayer />} />
             <Route path="/downloadplayer" element={<DownloadPlayer />} />
             <Route path="/webseries" element={<Webseries />} />
             <Route path="/trending" element={<Trending />} />
             <Route path="/anime" element={<Animeseries />} />
             <Route path="/cricket" element={<Cricket />} />
-            <Route path="/download" element={<Download />} />
+            <Route path="/" element={<Download />} />
           </Routes>
         </>
       )}

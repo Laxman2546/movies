@@ -41,7 +41,7 @@ const Movieplayer = () => {
   const names = movieName || seriesname || animename || horrorname;
   const movieNames = names.split(":").join("");
 
-  const servers = ["Server1", "Server2(MULTI-LANG)", "Server3"];
+  const servers = ["Server1", "Server2", "Server3(MULTI-LANG)"];
 
   return (
     <>
@@ -77,18 +77,18 @@ const Movieplayer = () => {
             loading="lazy"
             src={
               player === "Server1"
-                ? `https://vidsrc.xyz/embed/movie/${
-                    movieId || seriesId || animeId || horrorId
-                  }`
-                : player === "Server2(MULTI-LANG)"
                 ? `https://player4u.xyz/embed?key=${movieNames}+${
                     release || seriesyear || animeYear || horroryear
                   }`
-                : player === "Server3"
+                : player === "Server2"
+                ? `https://vidsrc.xyz/embed/movie/${
+                    movieId || seriesId || animeId || horrorId
+                  }`
+                : player === "Server3(MULTI-LANG)"
                 ? `https://player4u.xyz/embed?key=${movieNames}+(${
                     release || seriesyear || animeYear || horroryear
                   })`
-                : ""
+                : "null"
             }
             style={{
               position: "absolute",

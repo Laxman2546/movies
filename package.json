@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.0.6",
     "anigo-anime-api": "^1.0.3",
     "aniwatch": "^2.18.2",
+    "axios": "^1.9.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

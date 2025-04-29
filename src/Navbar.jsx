@@ -140,7 +140,7 @@ const Navbar = () => {
                 Home
               </Link>
               <Link to="/download" onClick={() => setIsOpen(false)}>
-                DownloadMovies
+                Movies
               </Link>
               <Link to="/trending" onClick={() => setIsOpen(false)}>
                 Horror

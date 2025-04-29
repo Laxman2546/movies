@@ -3,12 +3,15 @@ import { useLocation } from "react-router-dom";
 import loader from "./assets/loader.gif";
 import noposter from "./assets/noposter.jpg";
 import Navbar from "./Navbar";
+import IframeComp from "./components/IframeComp";
+
 
 const DownloadPlayer = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const [loading, setLoading] = useState(false);
   const [movieData, setMovieData] = useState([]);
+  const [streamUrl, setStreamUrl] = useState();
   const url = searchParams.get("url");
   const DownloadUrl = `https://movierulz.vercel.app/get?url=${url}`;
 
@@ -19,6 +22,20 @@ const DownloadPlayer = () => {
       const data = await fetch(DownloadUrl);
       const response = await data.json();
       setMovieData(response);
+      console.log(response);
+
+      const streamwishLink = response.other_links.find(
+        (link) => link.type === " Streamwish" && link.url
+      );
+      const streamLareLink = response.other_links.find(
+        (link) => link.type === " Streamlare" && link.url
+      );
+      console.log(streamwishLink);
+      const url = new URL(streamwishLink.url);
+      const pathname = url.pathname;
+      const frameUrl = pathname.split("/").pop();
+      console.log(frameUrl);
+      setStreamUrl(frameUrl);
     } catch (e) {
       console.log(e);
     } finally {
@@ -57,8 +74,10 @@ const DownloadPlayer = () => {
                   : "No overview found"}
               </p>
             </div>
-
-            <div className="w-full flex flex-col gap-3 mt-6">
+            <div>
+              <IframeComp stream={streamUrl} />
+            </div>
+            <div className="w-full flex flex-col gap-3 mt-15">
               <h1 className="text-lg md:text-base font-medium">
                 Torrent Links
               </h1>
