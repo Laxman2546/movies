@@ -64,7 +64,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex gap-8 text-white">
             <Link to="/">Home</Link>
-            <Link to="/movies">Download</Link>
+            <Link to="/download">movies</Link>
             <Link to="/trending">Horror</Link>
             <Link to="/anime">Anime</Link>
             <Link to="/webseries">Webseries</Link>
