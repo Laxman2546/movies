@@ -32,7 +32,6 @@ const Download = () => {
           pageNumber === 1 ? response.data : [...prev, ...response.data]
         );
       } else {
-        // No more data to load
         setHasMore(false);
       }
     } catch (e) {
@@ -42,15 +41,12 @@ const Download = () => {
       setLoading(false);
     }
   };
-
-  // Reset everything when query changes
   useEffect(() => {
     setMovieData([]);
     setPage(1);
     setHasMore(true);
   }, [query]);
 
-  // Fetch data when page changes or query changes
   useEffect(() => {
     movieFetch(page);
   }, [page, query]);
@@ -62,7 +58,7 @@ const Download = () => {
           document.documentElement.scrollHeight - 50 &&
         !loading &&
         hasMore &&
-        !query // Only enable infinite scroll for non-search results
+        !query
       ) {
         setPage((prevPage) => prevPage + 1);
       }
@@ -83,8 +79,9 @@ const Download = () => {
       {movieData.length === 0 && !loading ? (
         <div className="w-full text-center mt-25">
           <h2 className="font-medium lg:text-xl md:text-lg text-sm mt-2 break-words px-2 text-wrap line-clamp-2">
-            No movies found 😥
+            This page is in development try agin later! 😉
           </h2>
+          
         </div>
       ) : (
         <div className="w-full mt-25 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-3 gap-4">

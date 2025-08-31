@@ -11,6 +11,7 @@ const Movieplayer = () => {
   const searchParams = new URLSearchParams(location.search);
 
   const movieName = searchParams.get("movieName");
+
   const poster = searchParams.get("poster");
   const movieoverview = searchParams.get("movieoverview");
   const movieId = searchParams.get("movieId");
@@ -46,8 +47,6 @@ const Movieplayer = () => {
   return (
     <>
       <Navbar />
-
-      {/* Iframe Player */}
       <div
         style={{
           position: "relative",
@@ -77,14 +76,18 @@ const Movieplayer = () => {
             loading="lazy"
             src={
               player === "Server1"
+                ? `https://www.rivestream.app/embed?type=movie&id=${
+                    movieId || seriesId || animeId || horrorId
+                  }}`
+                : player === "Server2"
                 ? `https://player4u.xyz/embed?key=${movieNames}+${
                     release || seriesyear || animeYear || horroryear
                   }`
-                : player === "Server2"
+                : player === "Server3"
                 ? `https://vidsrc.xyz/embed/movie/${
                     movieId || seriesId || animeId || horrorId
                   }`
-                : player === "Server3(MULTI-LANG)"
+                : player === "Server4(MULTI-LANG)"
                 ? `https://player4u.xyz/embed?key=${movieNames}+(${
                     release || seriesyear || animeYear || horroryear
                   })`
