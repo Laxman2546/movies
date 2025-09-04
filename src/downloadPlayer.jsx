@@ -5,7 +5,6 @@ import noposter from "./assets/noposter.jpg";
 import Navbar from "./Navbar";
 import IframeComp from "./components/IframeComp";
 
-
 const DownloadPlayer = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -13,7 +12,7 @@ const DownloadPlayer = () => {
   const [movieData, setMovieData] = useState([]);
   const [streamUrl, setStreamUrl] = useState();
   const url = searchParams.get("url");
-  const DownloadUrl = `https://movierulz.vercel.app/get?url=${url}`;
+  const DownloadUrl = `https://mamasapi.vercel.app/get?url=${url}`;
 
   const fetchData = async () => {
     try {

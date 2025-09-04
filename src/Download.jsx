@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import noposter from "./assets/noposter.jpg";
 import loader from "./assets/loader.gif";
+import dev from "./assets/developer.webp";
 import { useLocation } from "react-router-dom";
 
 const Download = () => {
@@ -21,9 +22,8 @@ const Download = () => {
     setLoading(true);
     try {
       const url = query
-        ? `https://movierulz.vercel.app/search?query=${query}`
-        : `https://movierulz.vercel.app/telugu/${pageNumber}`;
-
+        ? `https://mamasapi.vercel.app/search?query=${query}`
+        : `https://mamasapi.vercel.app/telugu/${pageNumber}`;
       const data = await fetch(url);
       const response = await data.json();
 
@@ -31,6 +31,7 @@ const Download = () => {
         setMovieData((prev) =>
           pageNumber === 1 ? response.data : [...prev, ...response.data]
         );
+        console.log(response);
       } else {
         setHasMore(false);
       }
@@ -77,11 +78,15 @@ const Download = () => {
     <>
       <Navbar />
       {movieData.length === 0 && !loading ? (
-        <div className="w-full text-center mt-25">
-          <h2 className="font-medium lg:text-xl md:text-lg text-sm mt-2 break-words px-2 text-wrap line-clamp-2">
-            This page is in development try agin later! 😉
-          </h2>
-          
+        <div className="w-full flex flex-col gap-3 items-center justify-center mt-25 overflow-x-hidden">
+          <h1 className="text-xl font-semibold text-wrap ">
+            Something went wrong!😥 dont worry developer will fix that 😊
+          </h1>
+          <img
+            src={dev}
+            alt="developer img"
+            className="w-60 h-60 rounded-2xl"
+          />
         </div>
       ) : (
         <div className="w-full mt-25 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-3 gap-4">
